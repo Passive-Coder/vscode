@@ -649,6 +649,10 @@ export class AICustomizationDiscoveryPage extends Disposable implements IAICusto
 
 	private scheduleMarketplaceRefresh(force: boolean): void {
 		this.forceMarketplaceRefresh ||= force;
+		if (force) {
+			this.searchScheduler.cancel();
+			this.cancelCatalogRequest();
+		}
 		this.marketplaceRefreshScheduler.schedule();
 	}
 
